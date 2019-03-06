@@ -17,6 +17,9 @@ We built and tested tutorial on GKE version `1.12.5-gke.5` with Istio version `1
 
 * [Create a GKE cluster with Istio](docs/01-createclusterwithistio.md)
 * [Hello World Istio](docs/02-helloworldistio.md)
+* [Gateway and VirtualService](docs/03-gatewayvirtualservice.md)
+* [Istio add-ons](docs/04-istio-addons.md)
+
 -------
 
 This is not an official Google product.

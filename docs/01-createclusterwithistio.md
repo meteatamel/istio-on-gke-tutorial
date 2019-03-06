@@ -15,7 +15,7 @@ $ gcloud beta container clusters create hello-istio \
 In the end, you should see something similar to this:
 ```bash
 NAME         LOCATION        MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION 
-hello-istio  europe-west4-a  1.12.5-gke.5    35.204.127.85  n1-standard-2  1.12.5-gke.5         
+hello-istio  europe-west4-a  1.12.5-gke.5    35.204.127.85  n1-standard-2  1.12.5-gke.5
 ```
 
 ## Create cluster rolebinding

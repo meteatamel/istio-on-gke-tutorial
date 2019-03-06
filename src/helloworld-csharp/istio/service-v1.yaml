@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-csharp-service
+  labels:
+    app: helloworld-csharp
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: helloworld-csharp
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-csharp-deployment-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworld-csharp
+        version: v1
+    spec:
+      containers:
+      - name: helloworld-csharp
+        # Replace meteatamel with your actual DockerHub
+        image: meteatamel/istio-helloworld-csharp:v1
+        imagePullPolicy: Always #IfNotPresent
+        ports:
+        - containerPort: 8080

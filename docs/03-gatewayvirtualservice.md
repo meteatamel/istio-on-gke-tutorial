@@ -1,5 +1,5 @@
 # Gateway and VirtualService
-In the previous step, we deployed our app to Kubernetes. In this step, we'll get our app's traffic managed by Istio by creating Gateway and Virtual Service (TODO: Link). 
+In the previous step, we deployed our app to Kubernetes. In this step, we'll get our app's traffic managed by Istio by creating [Gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) and [VirtualService](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService). 
 
 Gateway allows external traffic into Service Mesh. It just specifies the protocol (HTTP/HTTPS) and the ports (80/443) that are exposed. 
 
@@ -7,13 +7,13 @@ VirtualService maps the traffic from Gateway to Kubernetes Services inside the S
 
 This is a visual representation of the relationship between Gateway, VirtualService, and Kubernetes Service:
 
-TODO: Link
+[![Gateway and Virtual Service](https://istio.io/blog/2018/v1alpha3-routing/virtualservices-destrules.svg)](https://istio.io/blog/2018/v1alpha3-routing/)
 
 ## Create Gateway
 
 Let's start with creating the Gateway. Our app uses HTTP on port 80, so let's expose those with a Gateway. 
 
-Create a [gateway.yaml](../src/helloworld-csharp/istio/gateway.yaml) file:
+Inside `istio` folder, create a [gateway.yaml](../src/helloworld-csharp/istio/gateway.yaml) file:
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -37,15 +37,7 @@ Create the Gateway:
 ```bash
 $ kubectl apply -f gateway.yaml
 
-TODO
-```
-
-Check that Gateway is created:
-
-```bash
-$ kubectl get gateway
-
-TODO
+gateway.networking.istio.io "helloworld-csharp-gateway" created
 ```
 
 ## Create VirtualService
@@ -74,15 +66,19 @@ Notice how the VirtualService ties together the Gateway and the Kubernetes Servi
 ```bash
 $ kubectl apply -f virtualservice.yaml
 
-TODO
+virtualservice.networking.istio.io "helloworld-csharp-virtualservice" created
 ```
 
-Check that VirtualService is created:
+Check that Gateway and VirtualService are created:
 
 ```bash
-$ kubectl get virtualservice
+$ kubectl get gateway,virtualservice
 
-TODO
+NAME                                                    AGE
+gateway.networking.istio.io/helloworld-csharp-gateway   1m
+
+NAME                                                                  AGE
+virtualservice.networking.istio.io/helloworld-csharp-virtualservice   22s
 ```
 
 ## Test the app
@@ -104,9 +100,9 @@ $ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 To see the response, you can open a browser with `GATEWAY_URL` or use curl:
 
 ```bash
-$ curl -o /dev/null -s -w "%{http_code}\n" "http://${GATEWAY_URL}"
+$ curl "http://${GATEWAY_URL}"
 
-TODO: Show Hello World!
+Hello World!
 ```
 
 ## What's Next?

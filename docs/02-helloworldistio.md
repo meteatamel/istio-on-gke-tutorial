@@ -56,7 +56,7 @@ docker push meteatamel/istio-helloworld-csharp:v1
 ## Create Kubernetes Service and Deployment
 We're now ready to deploy our app to Kubernetes. We need to create a Deployment to run the container in a pod and a Service to expose the pod to the outside world. 
 
-Create [service-v1.yaml](../src/helloworld-csharp/istio/service-v1.yaml) file:
+Create an `istio` folder and in that folder, create [service-v1.yaml](../src/helloworld-csharp/istio/service-v1.yaml) file:
 
 ```yaml
 apiVersion: v1
@@ -98,15 +98,20 @@ Create the Deployment and Service:
 ```bash
 $ kubectl apply -f service-v1.yaml
 
-TODO
+service "helloworld-csharp-service" created
+deployment.extensions "helloworld-csharp-deployment-v1" created
 ```
 
 Check that Deployment and Service is created:
 
 ```bash
-$ kubectl get deployment, svc
+$ kubectl get deployment,svc
 
-TODO
+NAME                                                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE
+deployment.extensions/helloworld-csharp-deployment-v1   1         1         1            1
+
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)
+service/helloworld-csharp-service   ClusterIP   10.23.243.14   <none>        8080/TCP
 ```
 
 ## What's Next?

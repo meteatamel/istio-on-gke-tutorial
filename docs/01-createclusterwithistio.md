@@ -1,5 +1,4 @@
 # Create GKE Cluster with Istio
-
 [Installing Istio on GKE](https://cloud.google.com/istio/docs/istio-on-gke/installing) page describes in detail how to prepare for installation by enabling Kubernetes Engine API, setting a region with `gcloud` and making sure `kubectl` is setup properly. It also talks about installing different versions of Istio and strict or permissive mTLS options. We assume that you already did all the prep work.
 
 ## Create cluster

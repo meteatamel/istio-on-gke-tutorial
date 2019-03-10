@@ -6,7 +6,7 @@ Once you get the basic Istio start managing the traffic of your application, you
 
 Install Prometheus:
 ```bash
-$ curl https://storage.googleapis.com/gke-release/istio/release/istio-version/patches/install-prometheus.yaml | kubectl apply -n istio-system -f -
+$ curl https://storage.googleapis.com/gke-release/istio/release/1.0.3-gke.3/patches/install-prometheus.yaml | kubectl apply -n istio-system -f -
 ```
 
 Verify that it's running:
@@ -26,14 +26,14 @@ $ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=
 
 You can now execute a query by clicking on the Web Preview button in the top-right corner of Cloud Shell and click Preview on port 8080. You’ll see the Prometheus UI in a new tab: 
 
-TODO
+![Prometheus](./images/prometheus.png)
 
 ## Grafana
 [Grafana](https://grafana.com/) is another add-on for visualizing metrics. 
 
 Install Grafana:
 ```bash
-$ curl https://storage.googleapis.com/gke-release/istio/release/istio-version/patches/install-grafana.yaml | kubectl apply -n istio-system -f -
+$ curl https://storage.googleapis.com/gke-release/istio/release/1.0.3-gke.3/patches/install-grafana.yaml | kubectl apply -n istio-system -f -
 ```
 
 Verify that it's running:
@@ -53,7 +53,7 @@ $ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=
 
 You can view Grafana dashboards by visiting Web Preview:
 
-TODO: Add image
+![Grafana](./images/grafana.png)
 
 ## ServiceGraph
 Another useful add-on is ServiceGraph for dependency visualization. 
@@ -65,7 +65,10 @@ $ curl https://storage.googleapis.com/gke-release/istio/release/1.0.3-gke.3/patc
 
 Verify that it's running:
 ```bash
-TODO
+$ kubectl get svc servicegraph -n istio-system
+
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)
+servicegraph   ClusterIP   10.23.249.238   <none>        8088/TCP
 ```
 
 Setup port forwarding:
@@ -74,7 +77,7 @@ $ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=
 ```
 And take a look at the service dependencies by visiting `http://localhost:8080/force/forcegraph.html` in Web Preview:
 
-TODO
+![Service Graph](./images/servicegraph.png)
 
 ## Tracing
 Lastly, we'll install some HTTP tracing add-ons. 
@@ -84,9 +87,12 @@ Install tracing:
 $ curl https://storage.googleapis.com/gke-release/istio/release/1.0.3-gke.3/patches/install-tracing.yaml | kubectl apply -n istio-system -f -
 ```
 
-Verify that it's running:
+Verify that Jaeger is running:
 ```bash
-$ 
+$ kubectl get svc jaeger-query -n istio-system
+
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)
+jaeger-query   ClusterIP   10.23.255.136   <none>        16686/TCP
 ```
 
 Setup port forwarding:
@@ -96,7 +102,7 @@ $ kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=
 
 Take a look at HTTP traces of your app by visiting `http://localhost:8080` in Web Preview:
 
-TODO
+![Jaeger](./images/jaeger.png)
 
 ## What's Next?
 In this section, we installed some of the add-ons to enhance Istio functionality. In the next section, we'll look at some of the traffic management features of Istio.

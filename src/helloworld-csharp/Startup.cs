@@ -36,7 +36,7 @@ namespace helloworld_csharp
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World v2!");
+                await context.Response.WriteAsync("Hello World!");
             });
         }
     }

@@ -4,7 +4,7 @@
 ## Create cluster
 First, let's create a GKE cluster with strict mTLS option:
 ```bash
-$ gcloud beta container clusters create hello-istio \
+gcloud beta container clusters create hello-istio \
     --addons=Istio --istio-config=auth=MTLS_STRICT \
     --cluster-version=latest \
     --machine-type=n1-standard-2 \
@@ -20,7 +20,7 @@ hello-istio  europe-west4-a  1.12.5-gke.5    35.204.127.85  n1-standard-2  1.12.
 ## Create cluster rolebinding
 Next, grant cluster admin permissions to the current user. You need these permissions to create the necessary role based access control (RBAC) rules for Istio:
 ```bash
-$ kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value core/account)
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value core/account)
 
 clusterrolebinding.rbac.authorization.k8s.io "cluster-admin-binding" created
 ```
@@ -28,7 +28,7 @@ clusterrolebinding.rbac.authorization.k8s.io "cluster-admin-binding" created
 ## Verify installation
 At this point, Istio should be up and running. Let's check Istio pods first. They should all be in `Running` or `Completed` states:
 ```bash
-$ kubectl get pod -n istio-system
+kubectl get pod -n istio-system
 
 NAME                                      READY     STATUS      RESTARTS   AGE
 istio-citadel-7d7bb58cd7-hst47            1/1       Running     0          11m
@@ -62,14 +62,14 @@ To let Istio manage your pods, your pods need to have an Envoy sidecar proxy. Yo
 
 Let's enable auto sidecar injection in default namespace:
 ```bash
-$ kubectl label namespace default istio-injection=enabled
+kubectl label namespace default istio-injection=enabled
 
 namespace "default" labeled
 ```
 
 Quick check to see if it's enabled:
 ```bash
-$ kubectl get namespace -L istio-injection
+kubectl get namespace -L istio-injection
 
 NAME           STATUS    AGE       ISTIO-INJECTION
 default        Active    23m       enabled

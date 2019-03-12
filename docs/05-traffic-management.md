@@ -75,7 +75,7 @@ spec:
 
 This creates a new deployment for `v2`. Let's deploy it:
 ```bash
-$ kubectl apply -f service-v1v2.yaml
+kubectl apply -f service-v1v2.yaml
 
 service "helloworld-csharp-service" unchanged
 deployment.extensions "helloworld-csharp-deployment-v1" unchanged
@@ -84,11 +84,11 @@ deployment.extensions "helloworld-csharp-deployment-v2" created
 
 Wait for pods to be initialized for `v2`. Once all pods are ready, ping GATEWAY_URL:
 ```bash
-$ curl "http://${GATEWAY_URL}"
+curl "http://${GATEWAY_URL}"
 
 Hello World!
 
-$ curl "http://${GATEWAY_URL}"
+curl "http://${GATEWAY_URL}"
 xs
 Hello World v2!
 ```
@@ -122,7 +122,7 @@ Notice how the DestinationRule associates Kubernetes labels with subset names.
 
 Create the DestionationRule:
 ```bash
-$ kubectl apply -f destinationrule.yaml
+kubectl apply -f destinationrule.yaml
 
 destinationrule.networking.istio.io "helloworld-csharp-destinationrule" created
 ```
@@ -147,14 +147,14 @@ spec:
 
 Update the VirtualService:
 ```bash
-$ kubectl apply -f virtualservice-v2.yaml
+kubectl apply -f virtualservice-v2.yaml
 
 virtualservice.networking.istio.io "helloworld-csharp-virtualservice" configured
 ```
 
 Now, if we now ping the GATEWAY_URL, it will always get a response from `v2`:
 ```bash
-$ curl "http://${GATEWAY_URL}"
+curl "http://${GATEWAY_URL}"
 
 Hello World v2!
 ```
@@ -187,7 +187,7 @@ spec:
 
 Update the VirtualService:
 ```bash
-$ kubectl apply -f virtualservice-weights.yaml
+kubectl apply -f virtualservice-weights.yaml
 
 virtualservice.networking.istio.io "helloworld-csharp-virtualservice" configured
 ```
@@ -221,14 +221,14 @@ spec:
 
 Update the VirtualService:
 ```bash
-$ kubectl apply -f virtualservice-fault-abort.yaml
+kubectl apply -f virtualservice-fault-abort.yaml
 
 virtualservice.networking.istio.io "helloworld-csharp-virtualservice" configured
 ```
 
 Now, we'll get HTTP 400 errors from `v1` half of the time:
 ```bash
-$ curl "http://${GATEWAY_URL}"
+curl "http://${GATEWAY_URL}"
 
 fault filter abort
 ```
@@ -257,7 +257,7 @@ spec:
 
 Update the VirtualService:
 ```bash
-$ kubectl apply -f virtualservice-fault-delay.yaml
+kubectl apply -f virtualservice-fault-delay.yaml
 
 virtualservice.networking.istio.io "helloworld-csharp-virtualservice" configured
 ```

@@ -6,12 +6,12 @@ We'll use C# and ASP.NET Core for the app but you can choose any language and fr
 ## Create an app
 Let's start with creating an empty ASP.NET Core app:
 ```bash
-$ dotnet new web -o helloworld-csharp
+dotnet new web -o helloworld-csharp
 ```
 
 Test that the app works fine locally. Inside the `helloworld-csharp` folder, run the app:
 ```bash
-$ dotnet run --urls=http://localhost:8080
+dotnet run --urls=http://localhost:8080
 
 Hosting environment: Development
 Content root path: /Users/atamel/dev/local/test/helloworld-csharp2
@@ -91,7 +91,7 @@ spec:
 
 Create the Deployment and Service:
 ```bash
-$ kubectl apply -f service-v1.yaml
+kubectl apply -f service-v1.yaml
 
 service "helloworld-csharp-service" created
 deployment.extensions "helloworld-csharp-deployment-v1" created
@@ -99,7 +99,7 @@ deployment.extensions "helloworld-csharp-deployment-v1" created
 
 Check that Deployment and Service is created:
 ```bash
-$ kubectl get deployment,svc
+kubectl get deployment,svc
 
 NAME                                                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE
 deployment.extensions/helloworld-csharp-deployment-v1   1         1         1            1

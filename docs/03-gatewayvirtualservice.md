@@ -32,7 +32,7 @@ spec:
 
 Create the Gateway:
 ```bash
-$ kubectl apply -f gateway.yaml
+kubectl apply -f gateway.yaml
 
 gateway.networking.istio.io "helloworld-csharp-gateway" created
 ```
@@ -59,14 +59,14 @@ spec:
 
 Notice how the VirtualService ties together the Gateway and the Kubernetes Service. Create the VirtualService:
 ```bash
-$ kubectl apply -f virtualservice.yaml
+kubectl apply -f virtualservice.yaml
 
 virtualservice.networking.istio.io "helloworld-csharp-virtualservice" created
 ```
 
 Check that Gateway and VirtualService are created:
 ```bash
-$ kubectl get gateway,virtualservice
+kubectl get gateway,virtualservice
 
 NAME                                                    AGE
 gateway.networking.istio.io/helloworld-csharp-gateway   1m
@@ -78,21 +78,21 @@ virtualservice.networking.istio.io/helloworld-csharp-virtualservice   22s
 ## Test the app
 We can finally test the app. All the traffic in Istio goes through `istio-ingressgateway`. You can find out the IP and port of `istio-ingressgateway`:
 ```bash
-$ kubectl get svc istio-ingressgateway -n istio-system
+kubectl get svc istio-ingressgateway -n istio-system
 ```
 
 To make it easier, you can get the ingress host and port and set a `GATEWAY_URL` variable to use in our testing:
 ```bash
-$ export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-$ export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
 
-$ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 ```
 
 To see the response, you can open a browser with `GATEWAY_URL` or use curl:
 ```bash
-$ curl "http://${GATEWAY_URL}"
+curl "http://${GATEWAY_URL}"
 
 Hello World!
 ```

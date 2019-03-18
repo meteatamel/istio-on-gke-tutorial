@@ -103,9 +103,9 @@ To create the subsets, create [destinationrule.yaml](../src/helloworld-csharp/is
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: aspnetcore-destinationrule
+  name: helloworld-csharp-destinationrule
 spec:
-  host: aspnetcore-service
+  host: helloworld-csharp-service
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

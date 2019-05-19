@@ -1,5 +1,5 @@
 # Gateway and VirtualService
-In the previous step, we deployed our app to Kubernetes. In this step, we'll get our app's traffic managed by Istio by creating [Gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) and [VirtualService](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService). 
+In the previous step, we deployed our app to Kubernetes. In this step, we'll get our app's traffic managed by Istio by creating [Gateway](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualService](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/). 
 
 Gateway allows external traffic into Service Mesh. It just specifies the protocol (HTTP/HTTPS) and the ports (80/443) that are exposed. 
 
